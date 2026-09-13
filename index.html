@@ -218,29 +218,38 @@ h1,h2,h3{margin:0; font-family:var(--serif); font-weight:500;}
 
 /* ---------- Journey preview ---------- */
 .journey{margin-top:26px;}
-.journey-list{list-style:none; margin:14px 0 0; padding:0;}
-.journey-list li{
-  position:relative;
-  padding:0 0 26px 26px;
-  font-size:15px;
-  font-weight:600;
-}
-.journey-list li::before{
+.journey-status{font-size:12.5px; font-weight:700; color:var(--green); margin-bottom:2px;}
+.jn-list{list-style:none; margin:14px 0 0; padding:0;}
+.jn-node{position:relative; padding:0 0 22px 28px;}
+.jn-node:last-child{padding-bottom:0;}
+.jn-node::before{
   content:'';
-  position:absolute; left:4px; top:6px;
-  width:7px; height:7px;
-  border-radius:50%;
-  background:var(--charcoal);
+  position:absolute; left:5px; top:16px; bottom:-6px;
+  width:1px; background:var(--line);
 }
-.journey-list li::after{
-  content:'';
-  position:absolute; left:7px; top:14px; bottom:2px;
-  width:1px;
-  background:var(--line);
+.jn-node:last-child::before{display:none;}
+.jn-dot{
+  position:absolute; left:0; top:3px;
+  width:11px; height:11px; border-radius:50%;
+  border:2px solid var(--line); background:var(--paper-raised);
 }
-.journey-list li:last-child::after{display:none;}
-.journey-list li:last-child::before{background:var(--terracotta);}
-.journey-list .place-tag{display:block; font-size:11px; font-weight:600; color:var(--muted); margin-top:2px;}
+.jn-node.done .jn-dot{background:var(--charcoal); border-color:var(--charcoal);}
+.jn-node.current .jn-dot{background:var(--terracotta); border-color:var(--terracotta);}
+.jn-node.current .jn-dot::after{
+  content:''; position:absolute; inset:-5px; border-radius:50%;
+  border:1.5px solid var(--terracotta);
+  animation:pulse-ring 2.6s ease-out infinite;
+}
+@keyframes pulse-ring{
+  0%{transform:scale(0.65); opacity:0.75;}
+  100%{transform:scale(2.1); opacity:0;}
+}
+.jn-place{font-size:15px; font-weight:600;}
+.jn-place-sub{font-size:11.5px; color:var(--muted); margin-top:2px; line-height:1.5;}
+.jn-time{font-size:12px; font-weight:700; color:var(--charcoal-soft); margin-top:2px;}
+.jn-flight-row{margin-top:5px; font-size:11.5px; font-weight:700; color:var(--muted);}
+.jn-flight-row.active{color:var(--terracotta);}
+.jn-flight-row.done{color:var(--green);}
 
 /* ---------- Package snapshot ---------- */
 .pkg-card{margin-top:26px;}
@@ -260,25 +269,36 @@ h1,h2,h3{margin:0; font-family:var(--serif); font-weight:500;}
 .quote-note b{color:var(--charcoal-soft);}
 
 /* ---------- Flights ---------- */
+.time-toggle-wrap{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
+.seg.small-seg{width:116px;}
+.seg.small-seg button{padding:7px 6px; font-size:12.5px;}
 .flight-card{overflow:hidden;}
-.flight-head{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
+.flight-head{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;}
 .flight-route-title{font-family:var(--serif); font-size:19px; font-weight:500;}
 .flight-airline{font-size:12.5px; color:var(--muted); margin-top:3px;}
 .flight-num{
   font-size:11.5px; font-weight:700; letter-spacing:0.03em;
   background:var(--sand); padding:4px 9px; border-radius:20px;
 }
+.pnr-row{display:flex; align-items:center; gap:8px; margin:10px 0 4px;}
+.pnr-label{font-size:10px; font-weight:700; letter-spacing:0.04em; color:var(--muted);}
+.pnr-code{font-family:'SFMono-Regular',Consolas,monospace; font-size:13px; font-weight:700; letter-spacing:0.03em;}
+.pnr-copy{background:none; border:none; color:var(--muted); font-size:13px; padding:2px 4px;}
+.pnr-copy:hover{color:var(--charcoal);}
 .flight-path{
-  display:flex; align-items:center; justify-content:space-between;
-  margin:22px 0 18px;
+  display:flex; align-items:flex-start; justify-content:space-between;
+  margin:20px 0 6px;
 }
-.fp-side{text-align:center; width:64px;}
+.fp-side{text-align:center; width:96px;}
 .fp-code{font-family:var(--serif); font-size:26px; font-weight:500;}
-.fp-city{font-size:11.5px; color:var(--muted); margin-top:2px;}
-.fp-time{font-size:13px; font-weight:700; margin-top:6px;}
-.fp-terminal{font-size:10.5px; color:var(--muted);}
+.fp-city{font-size:10.5px; color:var(--muted); margin-top:4px; line-height:1.4;}
+.fp-time{font-size:13px; font-weight:700; margin-top:8px;}
+.fp-date{font-size:10.5px; color:var(--muted); margin-top:1px;}
+.fp-terminal{font-size:10px; color:var(--muted);}
+.fp-mid{flex:1; display:flex; flex-direction:column; align-items:center; gap:7px; margin:6px 8px 0;}
+.fp-duration{font-size:10.5px; font-weight:700; color:var(--charcoal-soft);}
 .fp-line{
-  flex:1; position:relative; height:16px; margin:0 10px;
+  width:100%; position:relative; height:16px;
   display:flex; align-items:center;
 }
 .fp-line .track{
@@ -290,12 +310,17 @@ h1,h2,h3{margin:0; font-family:var(--serif); font-weight:500;}
   font-size:14px; color:var(--terracotta);
   animation:fly 5.5s ease-in-out infinite;
 }
+.fp-line.today .plane{animation-duration:3s; color:var(--terracotta);}
+.fp-line.upcoming .plane{animation-duration:6.5s; opacity:0.7;}
 @keyframes fly{
   0%{left:6%;}
   50%{left:94%;}
   100%{left:6%;}
 }
 .fp-line.paused .plane{animation-play-state:paused; left:50%;}
+.flight-status{text-align:center; font-size:12px; font-weight:700; color:var(--green); margin-bottom:10px;}
+.eticket-row{display:block; margin-top:6px; padding-top:14px; border-top:1px solid var(--line); font-size:13px; font-weight:700;}
+.eticket-row.eticket-link{color:var(--green);}
 .flight-foot{
   display:flex; justify-content:space-between; align-items:center;
   padding-top:14px; border-top:1px solid var(--line);
@@ -325,8 +350,14 @@ h1,h2,h3{margin:0; font-family:var(--serif); font-weight:500;}
   width:34px; flex-shrink:0;
 }
 .day-head.done .day-num{color:var(--green);}
+.day-head.now .day-num{color:var(--terracotta); animation:softpulse 2.4s ease-in-out infinite;}
+@keyframes softpulse{0%,100%{opacity:1;} 50%{opacity:0.5;}}
 .day-headtext{flex:1;}
-.day-date{font-size:11px; color:var(--muted); font-weight:600; letter-spacing:0.03em;}
+.day-date{font-size:11px; color:var(--muted); font-weight:600; letter-spacing:0.03em; display:flex; align-items:center; gap:8px;}
+.day-status{font-size:9.5px; font-weight:700; letter-spacing:0.03em; padding:2px 8px; border-radius:20px;}
+.day-status.upcoming{background:var(--sand); color:var(--charcoal-soft);}
+.day-status.now{background:var(--terracotta-soft); color:var(--terracotta);}
+.day-status.completed{background:var(--green-soft); color:var(--green);}
 .day-title{font-size:15.5px; font-weight:600; margin-top:2px;}
 .day-chevron{font-size:13px; color:var(--muted); transition:transform 0.25s ease;}
 .day-card.open .day-chevron{transform:rotate(90deg);}
@@ -584,6 +615,32 @@ h1,h2,h3{margin:0; font-family:var(--serif); font-weight:500;}
 
 <script>
 /* ============================================================
+   CONFIG — e-ticket links live here, never hardcoded inline.
+   Defaults are empty on purpose. To add a link without editing
+   this file, open the browser console on this page and run:
+
+   localStorage.setItem('eldhs-sha-config', JSON.stringify({
+     OUTBOUND_ETICKET_URL: "https://...",
+     RETURN_ETICKET_URL: "https://..."
+   }));
+
+   then refresh. Only URLs belong here — never credentials or
+   API keys. If you deploy this with a real build tool, wire
+   these to VITE_OUTBOUND_ETICKET_URL / VITE_RETURN_ETICKET_URL
+   instead.
+============================================================ */
+const CONFIG = {
+  OUTBOUND_ETICKET_URL: "",
+  RETURN_ETICKET_URL: ""
+};
+(function applyConfigOverrides(){
+  try{
+    const raw = localStorage.getItem("eldhs-sha-config");
+    if(raw) Object.assign(CONFIG, JSON.parse(raw));
+  }catch(e){}
+})();
+
+/* ============================================================
    DATA — sourced from the "Tick Your Tour" Bangkok+Pattaya
    couple package PDF and the trip's flight bookings.
 ============================================================ */
@@ -595,17 +652,15 @@ const TRIP = {
   route: ["Bengaluru","Bangkok","Pattaya","Bangkok","Kochi"],
   flights: {
     outbound: {
-      airline:"Thai Airways", num:"TG-326", plane:"Airbus A350",
-      date:"05 October 2026",
-      from:{code:"BLR", city:"Bengaluru", terminal:"Terminal 2", time:"00:55"},
-      to:{code:"BKK", city:"Bangkok", terminal:"", time:"06:20"},
+      airline:"Thai Airways", num:"TG-326", plane:"Airbus A350", pnr:"DIM4IK",
+      from:{code:"BLR", city:"Bengaluru", airport:"Kempegowda International Airport", terminal:"Terminal 2", time:"00:55", dateISO:"2026-10-05", tz:5.5},
+      to:{code:"BKK", city:"Bangkok", airport:"Suvarnabhumi Airport", terminal:"", time:"06:20", dateISO:"2026-10-05", tz:7},
       price: 30065
     },
     ret: {
-      airline:"Thai AirAsia", num:"FD-170", plane:"",
-      date:"09 October 2026",
-      from:{code:"DMK", city:"Bangkok", terminal:"Terminal 1", time:"20:15"},
-      to:{code:"COK", city:"Kochi", terminal:"Terminal 3", time:"22:30"},
+      airline:"Thai AirAsia", num:"FD-170", plane:"", pnr:"YERMYJ",
+      from:{code:"DMK", city:"Bangkok", airport:"Don Mueang International Airport", terminal:"Terminal 1", time:"20:15", dateISO:"2026-10-09", tz:7},
+      to:{code:"COK", city:"Kochi", airport:"Cochin International Airport", terminal:"Terminal 3", time:"22:30", dateISO:"2026-10-09", tz:5.5},
       price: 38111
     }
   },
@@ -694,7 +749,7 @@ const TRIP = {
         { title:"Morning", note:"Breakfast and check-out" },
         { title:"Bangkok city tour", note:"Golden Buddha Temple (Wat Traimit), Mini Reclining Buddha Temple" },
         { title:"Airport transfer", note:"Bangkok → DMK" },
-        { title:"Return flight", note:"FD-170 · DMK → COK · 20:15 → 22:30" }
+        { title:"Return flight", note:"__RETURN_FLIGHT_NOTE__" }
       ],
       checklist:[
         {id:"d5c1", label:"Check out of Bangkok hotel"},
@@ -840,7 +895,8 @@ let state = {
   hotelConfirmed: {},     // hotel key -> bool
   pendingAmount: 35298,   // 51998 - 16700
   budget: 150000,
-  expenses: []            // [{id,amount,category,desc,date,paidBy,method}]
+  expenses: [],           // [{id,amount,category,desc,date,paidBy,method}]
+  timeFormat: "12"        // "12" | "24" — persisted, applies app-wide
 };
 
 function fmtINR(n){
@@ -866,6 +922,7 @@ async function loadState(){
   if(typeof kv.pendingAmount === "number") state.pendingAmount = kv.pendingAmount;
   if(typeof kv.budget === "number") state.budget = kv.budget;
   if(kv.expenses) state.expenses = kv.expenses;
+  if(kv.timeFormat === "12" || kv.timeFormat === "24") state.timeFormat = kv.timeFormat;
 }
 function persist(key){ idbSet(key, state[key]); }
 
@@ -898,6 +955,62 @@ function daysUntilStart(){
   const now = new Date();
   const diff = Math.ceil((start - now) / 86400000);
   return diff;
+}
+
+/* ---------- Time / date formatting (12h / 24h aware) ---------- */
+function formatDate(dateISO, style){
+  const d = new Date(dateISO+"T00:00:00");
+  const day = String(d.getDate()).padStart(2,'0');
+  const year = d.getFullYear();
+  if(style === "short") return `${day} ${d.toLocaleString("en-US",{month:"short"})}`;
+  return `${day} ${d.toLocaleString("en-US",{month:"long"})} ${year}`;
+}
+function to12h(hhmm){
+  const [h,m] = hhmm.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  let h12 = h % 12; if(h12 === 0) h12 = 12;
+  return `${h12}:${String(m).padStart(2,"0")} ${period}`;
+}
+function formatTime(hhmm){
+  if(!hhmm) return "";
+  return state.timeFormat === "12" ? to12h(hhmm) : hhmm;
+}
+/* Converts a local date+time+UTC-offset(hours) into a true UTC timestamp (ms),
+   so durations across timezones are computed correctly rather than by
+   subtracting the displayed clock values. */
+function utcMillis(dateISO, hhmm, tzOffsetHours){
+  const [y,mo,da] = dateISO.split("-").map(Number);
+  const [h,mi] = hhmm.split(":").map(Number);
+  return Date.UTC(y, mo-1, da, h, mi) - tzOffsetHours*3600000;
+}
+function flightDurationMinutes(f){
+  const depUTC = utcMillis(f.from.dateISO, f.from.time, f.from.tz);
+  const arrUTC = utcMillis(f.to.dateISO, f.to.time, f.to.tz);
+  return Math.round((arrUTC - depUTC) / 60000);
+}
+function flightDurationLabel(f){
+  const total = flightDurationMinutes(f);
+  const h = Math.floor(total/60), m = total%60;
+  return `${h}h ${m}m`;
+}
+/* upcoming | today (in progress) | done — based on real departure/arrival instants */
+function flightStatus(f){
+  const depUTC = utcMillis(f.from.dateISO, f.from.time, f.from.tz);
+  const arrUTC = utcMillis(f.to.dateISO, f.to.time, f.to.tz);
+  const now = Date.now();
+  if(now < depUTC) return "upcoming";
+  if(now <= arrUTC) return "today";
+  return "done";
+}
+function dayStatus(day, dIdx){
+  if(dIdx === -1) return "upcoming";
+  if(dIdx === 99) return "completed";
+  if(day.num < dIdx) return "completed";
+  if(day.num === dIdx) return "now";
+  return "upcoming";
+}
+function dayStatusLabel(s){
+  return s === "now" ? "Now" : s === "completed" ? "Completed" : "Upcoming";
 }
 
 /* ============================================================
@@ -982,10 +1095,9 @@ function renderHome(){
     </div>
 
     <div class="journey">
-      <div class="section-title" style="font-size:18px;">Journey</div>
-      <ul class="journey-list">
-        ${TRIP.route.map(p=>`<li>${p}</li>`).join("")}
-      </ul>
+      <div class="section-title" style="font-size:18px;">Our journey</div>
+      ${dIdx===99 ? `<div class="journey-status">✓ Journey completed</div>` : ""}
+      <ul class="jn-list">${renderJourneyNodes(dIdx)}</ul>
     </div>
 
     <div class="card pkg-card">
@@ -1016,7 +1128,7 @@ function renderHome(){
 function computeNextEvent(dIdx){
   if(dIdx === -1){
     const f = TRIP.flights.outbound;
-    return { title: `✈ ${f.num}`, sub: `Bengaluru → Bangkok · ${f.date.slice(0,2)} Oct · ${f.from.time}` };
+    return { title: `✈ ${f.num}`, sub: `Bengaluru → Bangkok · ${formatDate(f.from.dateISO,'short')} · ${formatTime(f.from.time)}` };
   }
   if(dIdx >= 1 && dIdx <= 5){
     for(let i = dIdx-1; i < TRIP.days.length; i++){
@@ -1026,43 +1138,108 @@ function computeNextEvent(dIdx){
         return { title: item.label, sub: `Day ${day.num} · ${day.place}` };
       }
     }
-    return { title: "Return flight", sub: `FD-170 · Bangkok → Kochi · 20:15` };
+    const f = TRIP.flights.ret;
+    return { title: `✈ ${f.num}`, sub: `Bangkok → Kochi · ${formatTime(f.from.time)}` };
   }
   return { title: "Trip completed", sub: "Hope it was unforgettable — check Expenses for the final tally." };
 }
 
 /* ============================================================
+   HOME — JOURNEY TIMELINE
+   Nodes advance automatically based on the current date. Each
+   node's "dayThreshold" is the trip-day index (see dayIndexFromNow)
+   at which it becomes current; -1 means "before the trip starts".
+============================================================ */
+function journeyNodes(){
+  return [
+    { type:"place", code:"BLR", city:"Bengaluru", airport:"Kempegowda International Airport", terminal:"Terminal 2", time:TRIP.flights.outbound.from.time, dayThreshold:-1 },
+    { type:"flight", ref:"outbound", dayThreshold:1 },
+    { type:"place", code:"BKK", city:"Bangkok", airport:"Suvarnabhumi Airport", time:TRIP.flights.outbound.to.time, dayThreshold:1 },
+    { type:"place", label:"Pattaya", sub:"Private transfer · Tiger Topia", dayThreshold:1 },
+    { type:"place", label:"Bangkok", sub:"Sightseeing · Safari World", dayThreshold:3 },
+    { type:"flight", ref:"ret", dayThreshold:5 },
+    { type:"place", code:"COK", city:"Kochi", airport:"Cochin International Airport", terminal:"Terminal 3", time:TRIP.flights.ret.to.time, dayThreshold:5 }
+  ];
+}
+function renderJourneyNodes(dIdx){
+  return journeyNodes().map(n=>{
+    const status = dIdx === n.dayThreshold ? "current" : (n.dayThreshold < dIdx ? "done" : "upcoming");
+    if(n.type === "flight"){
+      const f = TRIP.flights[n.ref];
+      const fs = flightStatus(f);
+      const dur = flightDurationLabel(f);
+      const rowClass = fs === "done" ? "done" : (fs === "today" ? "active" : "");
+      const label = fs === "done" ? `✓ ${f.num} completed` : `✈ ${f.num} · ${f.airline} · ${dur}`;
+      return `<li class="jn-node ${status}">
+        <div class="jn-flight-row ${rowClass}">${label}</div>
+      </li>`;
+    }
+    const title = n.city || n.label;
+    const subParts = [];
+    if(n.airport) subParts.push(n.airport + (n.terminal ? " · "+n.terminal : ""));
+    if(n.sub) subParts.push(n.sub);
+    return `<li class="jn-node ${status}">
+      <div class="jn-dot"></div>
+      <div class="jn-place">${n.code ? n.code+" · "+title : title}</div>
+      ${subParts.length ? `<div class="jn-place-sub">${subParts.join(" · ")}</div>` : ""}
+      ${n.time ? `<div class="jn-time">${formatTime(n.time)}</div>` : ""}
+    </li>`;
+  }).join("");
+}
+
+/* ============================================================
    RENDER: FLIGHTS
 ============================================================ */
-function flightCard(f, dir){
+function eticketLink(url){
+  if(!url) return `<div class="eticket-row muted small">E-ticket not added yet</div>`;
+  return `<a class="eticket-row eticket-link" href="${url}" target="_blank" rel="noopener">↓ View / Download E-ticket</a>`;
+}
+function flightCard(f, ref, label){
+  const fs = flightStatus(f);
+  const dur = flightDurationLabel(f);
+  const eticketUrl = ref === "outbound" ? CONFIG.OUTBOUND_ETICKET_URL : CONFIG.RETURN_ETICKET_URL;
   return `
-    <div class="card flight-card" data-flight="${dir}">
+    <div class="card flight-card" data-flight="${ref}">
+      <div class="eyebrow" style="margin-bottom:10px;">${label}</div>
       <div class="flight-head">
         <div>
           <div class="flight-route-title">${f.from.city} → ${f.to.city}</div>
-          <div class="flight-airline">${f.airline}${f.plane? " · "+f.plane:""} · ${f.date}</div>
+          <div class="flight-airline">${f.airline} · ${f.num}</div>
         </div>
         <div class="flight-num">${f.num}</div>
+      </div>
+      <div class="pnr-row">
+        <span class="pnr-label">PNR</span>
+        <span class="pnr-code">${f.pnr}</span>
+        <button class="pnr-copy" data-copy="${f.pnr}" title="Copy PNR">⧉</button>
       </div>
       <div class="flight-path">
         <div class="fp-side">
           <div class="fp-code">${f.from.code}</div>
-          <div class="fp-city">${f.from.city}</div>
-          ${f.from.terminal?`<div class="fp-terminal">${f.from.terminal}</div>`:""}
-          <div class="fp-time">${f.from.time}</div>
+          <div class="fp-city">${f.from.airport}${f.from.terminal?` · ${f.from.terminal}`:""}</div>
+          <div class="fp-time">${formatTime(f.from.time)}</div>
+          <div class="fp-date">${formatDate(f.from.dateISO,'short')}</div>
         </div>
-        <div class="fp-line paused"><div class="track"></div><div class="plane">✈</div></div>
+        <div class="fp-mid">
+          <div class="fp-line ${fs} ${fs!=='done'?'paused':''}">
+            <div class="track"></div>
+            ${fs!=='done' ? '<div class="plane">✈</div>' : ''}
+          </div>
+          <div class="fp-duration">${dur}</div>
+        </div>
         <div class="fp-side">
           <div class="fp-code">${f.to.code}</div>
-          <div class="fp-city">${f.to.city}</div>
-          ${f.to.terminal?`<div class="fp-terminal">${f.to.terminal}</div>`:""}
-          <div class="fp-time">${f.to.time}</div>
+          <div class="fp-city">${f.to.airport}${f.to.terminal?` · ${f.to.terminal}`:""}</div>
+          <div class="fp-time">${formatTime(f.to.time)}</div>
+          <div class="fp-date">${formatDate(f.to.dateISO,'short')}</div>
         </div>
       </div>
+      ${fs==='done' ? '<div class="flight-status">✓ Completed</div>' : ''}
       <div class="flight-foot">
-        <span class="muted">Ticket</span>
+        <span class="muted">${f.plane || f.airline}</span>
         <span style="font-weight:700;">${fmtINR(f.price)}</span>
       </div>
+      ${eticketLink(eticketUrl)}
     </div>
   `;
 }
@@ -1071,8 +1248,15 @@ function renderFlights(){
   el.innerHTML = `
     <div class="eyebrow">Flights</div>
     <h2 class="section-title" style="margin-bottom:18px;">How we're getting there</h2>
-    ${flightCard(TRIP.flights.outbound, "out")}
-    ${flightCard(TRIP.flights.ret, "ret")}
+    <div class="time-toggle-wrap">
+      <span class="muted small">Time format</span>
+      <div class="seg small-seg" id="timeFormatToggle">
+        <button data-tf="12" class="${state.timeFormat==='12'?'active':''}">12h</button>
+        <button data-tf="24" class="${state.timeFormat==='24'?'active':''}">24h</button>
+      </div>
+    </div>
+    ${flightCard(TRIP.flights.outbound, "outbound", "Outbound")}
+    ${flightCard(TRIP.flights.ret, "ret", "Return")}
     <div class="flight-total">
       <div class="muted small">Total flight cost</div>
       <div class="amt">${fmtINR(TRIP.flights.outbound.price + TRIP.flights.ret.price)}</div>
@@ -1082,6 +1266,23 @@ function renderFlights(){
       </div>
     </div>
   `;
+  el.querySelectorAll("#timeFormatToggle button").forEach(b=>{
+    b.addEventListener("click", async ()=>{
+      state.timeFormat = b.getAttribute("data-tf");
+      await persist("timeFormat");
+      renderFlights();
+      renderHome();
+      armFlightAnimations();
+    });
+  });
+  el.querySelectorAll("[data-copy]").forEach(btn=>{
+    btn.addEventListener("click", async ()=>{
+      const val = btn.getAttribute("data-copy");
+      try{ await navigator.clipboard.writeText(val); }catch(e){}
+      toast("Copied");
+    });
+  });
+  armFlightAnimations();
 }
 let flightObserver = null;
 function armFlightAnimations(){
@@ -1089,7 +1290,7 @@ function armFlightAnimations(){
   flightObserver = new IntersectionObserver((entries)=>{
     entries.forEach(entry=>{
       const line = entry.target.querySelector(".fp-line");
-      if(!line) return;
+      if(!line || line.classList.contains("done")) return;
       if(entry.isIntersecting) line.classList.remove("paused");
       else line.classList.add("paused");
     });
@@ -1101,6 +1302,13 @@ function armFlightAnimations(){
    RENDER: ITINERARY
 ============================================================ */
 let openDayId = null;
+function resolveNote(note){
+  if(note === "__RETURN_FLIGHT_NOTE__"){
+    const f = TRIP.flights.ret;
+    return `${f.num} · DMK → COK · ${formatTime(f.from.time)} → ${formatTime(f.to.time)}`;
+  }
+  return note;
+}
 function renderItinerary(){
   const el = document.querySelector('[data-panel="itinerary"]');
   el.innerHTML = `
@@ -1108,16 +1316,18 @@ function renderItinerary(){
     <h2 class="section-title" style="margin-bottom:18px;">Day by day</h2>
     <div class="timeline" id="timelineWrap"></div>
   `;
+  const dIdx = dayIndexFromNow();
   const wrap = document.getElementById("timelineWrap");
   wrap.innerHTML = TRIP.days.map(day=>{
     const done = day.checklist.every(c=> state.checklist[c.id]);
     const isOpen = openDayId === day.id;
+    const dstat = dayStatus(day, dIdx);
     return `
     <div class="day-card ${isOpen?'open':''}" data-day="${day.id}">
-      <button class="day-head ${done?'done':''}" data-toggle="${day.id}">
+      <button class="day-head ${done?'done':''} ${dstat}" data-toggle="${day.id}">
         <div class="day-num">${String(day.num).padStart(2,'0')}</div>
         <div class="day-headtext">
-          <div class="day-date">${day.date}</div>
+          <div class="day-date">${day.date}<span class="day-status ${dstat}">${dayStatusLabel(dstat)}</span></div>
           <div class="day-title">${day.title}</div>
         </div>
         <div class="day-chevron">→</div>
@@ -1126,7 +1336,7 @@ function renderItinerary(){
         ${day.blocks.map(b=>`
           <div class="day-block">
             <div class="day-block-title">${b.title}${b.tagOptional?'<span class="tag optional">Optional · Own cost</span>':''}${b.tagFree?'<span class="tag free">Free time</span>':''}</div>
-            ${b.events ? b.events.map(ev=>`<div class="event-row"><span class="event-time">${ev.time}</span><span>${ev.label}</span></div>`).join("") : `<div style="font-size:13.5px; color:var(--charcoal-soft);">${b.note}</div>`}
+            ${b.events ? b.events.map(ev=>`<div class="event-row"><span class="event-time">${ev.time?formatTime(ev.time):""}</span><span>${ev.label}</span></div>`).join("") : `<div style="font-size:13.5px; color:var(--charcoal-soft);">${resolveNote(b.note)}</div>`}
           </div>
         `).join("")}
         <div class="day-block">
@@ -1438,7 +1648,8 @@ function exportData(){
     hotelConfirmed: state.hotelConfirmed,
     pendingAmount: state.pendingAmount,
     budget: state.budget,
-    expenses: state.expenses
+    expenses: state.expenses,
+    timeFormat: state.timeFormat
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
   const url = URL.createObjectURL(blob);
@@ -1462,7 +1673,8 @@ async function importData(file){
     if(typeof data.pendingAmount === "number") state.pendingAmount = data.pendingAmount;
     if(typeof data.budget === "number") state.budget = data.budget;
     if(data.expenses) state.expenses = data.expenses;
-    await Promise.all(["checklist","packageActivityDone","personalTodos","hotelConfirmed","pendingAmount","budget","expenses"].map(persist));
+    if(data.timeFormat === "12" || data.timeFormat === "24") state.timeFormat = data.timeFormat;
+    await Promise.all(["checklist","packageActivityDone","personalTodos","hotelConfirmed","pendingAmount","budget","expenses","timeFormat"].map(persist));
     renderAll();
     toast("Trip data imported");
   }catch(e){
@@ -1473,7 +1685,7 @@ async function resetAllData(){
   await idbClearAll();
   state = {
     checklist:{}, packageActivityDone:{}, personalTodos:[], hotelConfirmed:{},
-    pendingAmount: 35298, budget: 150000, expenses: []
+    pendingAmount: 35298, budget: 150000, expenses: [], timeFormat: "12"
   };
   await loadState();
   renderAll();
