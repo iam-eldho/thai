@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eldhs × Sha — Thailand</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --charcoal:#232019;
+  --charcoal-soft:#4a453d;
+  --paper:#f7f3ea;
+  --paper-raised:#fffdf8;
+  --sand:#ebe2cd;
+  --line:rgba(35,32,25,0.11);
+  --green:#3f6b52;
+  --green-soft:#e7ede7;
+  --terracotta:#b5623f;
+  --terracotta-soft:#f3e4dc;
+  --muted:#8b8477;
+  --radius:20px;
+  --radius-sm:12px;
+  --shadow:0 1px 2px rgba(35,32,25,0.04), 0 8px 24px rgba(35,32,25,0.05);
+  --serif:'Fraunces', serif;
+  --sans:'Manrope', sans-serif;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--charcoal);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
+button{font-family:inherit; cursor:pointer;}
+input,select,textarea{font-family:inherit;}
+a{color:inherit;}
+
+/* ---------- App shell ---------- */
+#app{
+  display:flex;
+  min-height:100vh;
+  max-width:1180px;
+  margin:0 auto;
+}
+#sidebar{
+  display:none;
+  flex-direction:column;
+  width:230px;
+  flex-shrink:0;
+  padding:36px 18px;
+  border-right:1px solid var(--line);
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.brand{
+  font-family:var(--serif);
+  font-size:19px;
+  font-weight:500;
+  letter-spacing:0.01em;
+  margin-bottom:2px;
+}
+.brand-sub{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:36px;
+}
+.nav-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px;}
+.nav-item{
+  display:flex; align-items:center; gap:12px;
+  padding:11px 14px;
+  border-radius:11px;
+  color:var(--charcoal-soft);
+  font-size:14.5px;
+  font-weight:500;
+  border:none;
+  background:none;
+  width:100%;
+  text-align:left;
+  transition:background 0.15s ease, color 0.15s ease;
+}
+.nav-item .sym{font-size:16px; width:18px; text-align:center; opacity:0.85;}
+.nav-item:hover{background:var(--sand);}
+.nav-item.active{background:var(--charcoal); color:var(--paper-raised);}
+.nav-item.active .sym{opacity:1;}
+
+#main{
+  flex:1;
+  min-width:0;
+  padding:0 0 96px 0;
+}
+.panel{display:none; padding:28px 20px 20px; max-width:640px; margin:0 auto;}
+.panel.active{display:block; animation:fadein 0.35s ease;}
+@keyframes fadein{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
+
+@media (min-width:860px){
+  #sidebar{display:flex;}
+  .panel{padding:48px 40px 48px; max-width:720px;}
+  #bottomnav{display:none !important;}
+}
+
+/* ---------- Bottom nav (mobile) ---------- */
+#bottomnav{
+  position:fixed;
+  bottom:0; left:0; right:0;
+  display:flex;
+  background:var(--paper-raised);
+  border-top:1px solid var(--line);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  z-index:50;
+}
+.bn-item{
+  flex:1;
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  background:none; border:none; padding:6px 2px;
+  color:var(--muted);
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:0.02em;
+}
+.bn-item .sym{font-size:18px; line-height:1;}
+.bn-item.active{color:var(--charcoal);}
+
+/* ---------- Typography helpers ---------- */
+h1,h2,h3{margin:0; font-family:var(--serif); font-weight:500;}
+.eyebrow{
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:0.06em;
+  color:var(--muted);
+  margin:0 0 6px;
+}
+.section-title{font-family:var(--serif); font-size:22px; font-weight:500; margin:0 0 4px;}
+.muted{color:var(--muted);}
+.small{font-size:12.5px;}
+
+/* ---------- Cards ---------- */
+.card{
+  background:var(--paper-raised);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:20px;
+}
+.card + .card{margin-top:14px;}
+.stack{display:flex; flex-direction:column; gap:14px;}
+
+/* ---------- Home hero ---------- */
+.hero{
+  padding-top:8px;
+  margin-bottom:26px;
+}
+.hero-names{
+  font-family:var(--serif);
+  font-size:15px;
+  color:var(--green);
+  font-style:italic;
+  margin-bottom:10px;
+}
+.hero-title{
+  font-family:var(--serif);
+  font-size:38px;
+  line-height:1.08;
+  font-weight:500;
+  margin-bottom:14px;
+}
+.hero-meta{
+  display:flex; align-items:center; gap:10px;
+  color:var(--charcoal-soft);
+  font-size:14.5px;
+  font-weight:500;
+}
+.hero-meta .dot{width:3px; height:3px; border-radius:50%; background:var(--muted);}
+.countdown-card{
+  margin-top:18px;
+  background:var(--charcoal);
+  color:var(--paper-raised);
+  border-radius:var(--radius);
+  padding:22px 22px;
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+}
+.countdown-num{font-family:var(--serif); font-size:34px; font-weight:500;}
+.countdown-label{font-size:13px; color:rgba(247,243,234,0.65); max-width:180px; text-align:right;}
+
+/* ---------- Overview grid ---------- */
+.grid4{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px;}
+.ov-card{
+  background:var(--paper-raised);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  padding:15px 16px;
+}
+.ov-label{font-size:11px; font-weight:700; letter-spacing:0.04em; color:var(--muted); margin-bottom:8px;}
+.ov-value{font-size:15px; font-weight:600; line-height:1.35;}
+
+/* ---------- Next event ---------- */
+.next-card{
+  margin-top:22px;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:var(--green-soft);
+  padding:20px;
+  position:relative;
+}
+.next-tag{font-size:11px; font-weight:700; letter-spacing:0.05em; color:var(--green); margin-bottom:10px;}
+.next-title{font-family:var(--serif); font-size:22px; font-weight:500; margin-bottom:4px;}
+.next-sub{font-size:13.5px; color:var(--charcoal-soft);}
+
+/* ---------- Journey preview ---------- */
+.journey{margin-top:26px;}
+.journey-list{list-style:none; margin:14px 0 0; padding:0;}
+.journey-list li{
+  position:relative;
+  padding:0 0 26px 26px;
+  font-size:15px;
+  font-weight:600;
+}
+.journey-list li::before{
+  content:'';
+  position:absolute; left:4px; top:6px;
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--charcoal);
+}
+.journey-list li::after{
+  content:'';
+  position:absolute; left:7px; top:14px; bottom:2px;
+  width:1px;
+  background:var(--line);
+}
+.journey-list li:last-child::after{display:none;}
+.journey-list li:last-child::before{background:var(--terracotta);}
+.journey-list .place-tag{display:block; font-size:11px; font-weight:600; color:var(--muted); margin-top:2px;}
+
+/* ---------- Package snapshot ---------- */
+.pkg-card{margin-top:26px;}
+.pkg-row{display:flex; justify-content:space-between; align-items:center; padding:10px 0;}
+.pkg-row + .pkg-row{border-top:1px solid var(--line);}
+.pkg-amt{font-size:18px; font-weight:700;}
+.pkg-input{
+  width:120px; text-align:right;
+  border:1px solid var(--line); border-radius:8px;
+  padding:6px 9px; font-size:15px; font-weight:600;
+  background:var(--paper); color:var(--charcoal);
+}
+.quote-note{
+  margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+  font-size:12.5px; color:var(--muted); line-height:1.6;
+}
+.quote-note b{color:var(--charcoal-soft);}
+
+/* ---------- Flights ---------- */
+.flight-card{overflow:hidden;}
+.flight-head{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;}
+.flight-route-title{font-family:var(--serif); font-size:19px; font-weight:500;}
+.flight-airline{font-size:12.5px; color:var(--muted); margin-top:3px;}
+.flight-num{
+  font-size:11.5px; font-weight:700; letter-spacing:0.03em;
+  background:var(--sand); padding:4px 9px; border-radius:20px;
+}
+.flight-path{
+  display:flex; align-items:center; justify-content:space-between;
+  margin:22px 0 18px;
+}
+.fp-side{text-align:center; width:64px;}
+.fp-code{font-family:var(--serif); font-size:26px; font-weight:500;}
+.fp-city{font-size:11.5px; color:var(--muted); margin-top:2px;}
+.fp-time{font-size:13px; font-weight:700; margin-top:6px;}
+.fp-terminal{font-size:10.5px; color:var(--muted);}
+.fp-line{
+  flex:1; position:relative; height:16px; margin:0 10px;
+  display:flex; align-items:center;
+}
+.fp-line .track{
+  position:absolute; left:0; right:0; top:50%; height:1px;
+  background:var(--line);
+}
+.fp-line .plane{
+  position:absolute; top:50%; transform:translate(-50%,-50%);
+  font-size:14px; color:var(--terracotta);
+  animation:fly 5.5s ease-in-out infinite;
+}
+@keyframes fly{
+  0%{left:6%;}
+  50%{left:94%;}
+  100%{left:6%;}
+}
+.fp-line.paused .plane{animation-play-state:paused; left:50%;}
+.flight-foot{
+  display:flex; justify-content:space-between; align-items:center;
+  padding-top:14px; border-top:1px solid var(--line);
+  font-size:13px;
+}
+.flight-total{margin-top:14px; text-align:center;}
+.flight-total .amt{font-family:var(--serif); font-size:28px; font-weight:500;}
+.flight-total-rows{display:flex; justify-content:center; gap:22px; margin-top:8px; font-size:12.5px; color:var(--muted);}
+
+/* ---------- Itinerary ---------- */
+.timeline{position:relative; margin-top:18px;}
+.day-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--paper-raised);
+  margin-bottom:12px;
+  overflow:hidden;
+}
+.day-head{
+  width:100%; background:none; border:none;
+  display:flex; align-items:center; gap:14px;
+  padding:17px 18px;
+  text-align:left;
+}
+.day-num{
+  font-family:var(--serif); font-size:22px; font-weight:500; color:var(--muted);
+  width:34px; flex-shrink:0;
+}
+.day-head.done .day-num{color:var(--green);}
+.day-headtext{flex:1;}
+.day-date{font-size:11px; color:var(--muted); font-weight:600; letter-spacing:0.03em;}
+.day-title{font-size:15.5px; font-weight:600; margin-top:2px;}
+.day-chevron{font-size:13px; color:var(--muted); transition:transform 0.25s ease;}
+.day-card.open .day-chevron{transform:rotate(90deg);}
+.day-body{
+  max-height:0; overflow:hidden; transition:max-height 0.35s ease;
+  padding:0 18px;
+}
+.day-card.open .day-body{padding-bottom:18px;}
+.day-block{margin-top:16px; padding-top:16px; border-top:1px solid var(--line);}
+.day-block:first-child{margin-top:2px; padding-top:0; border-top:none;}
+.day-block-title{font-size:11.5px; font-weight:700; letter-spacing:0.03em; color:var(--muted); margin-bottom:8px;}
+.event-row{display:flex; gap:10px; font-size:13.5px; margin-bottom:6px;}
+.event-time{font-weight:700; width:50px; flex-shrink:0; color:var(--charcoal-soft);}
+.tag{
+  display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:0.03em;
+  padding:2px 8px; border-radius:20px; margin-left:8px;
+}
+.tag.optional{background:var(--terracotta-soft); color:var(--terracotta);}
+.tag.free{background:var(--sand); color:var(--charcoal-soft);}
+
+.check-item{
+  display:flex; align-items:center; gap:10px;
+  padding:8px 0; font-size:14px; cursor:pointer;
+  user-select:none;
+}
+.check-box{
+  width:19px; height:19px; border-radius:6px; flex-shrink:0;
+  border:1.5px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  font-size:12px; color:var(--paper-raised);
+}
+.check-item.checked .check-box{background:var(--green); border-color:var(--green); transform:scale(1.04);}
+.check-item.checked .check-label{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line);}
+.check-label{flex:1;}
+
+/* ---------- Progress bar ---------- */
+.progress-wrap{margin-top:10px;}
+.progress-track{height:6px; background:var(--sand); border-radius:20px; overflow:hidden;}
+.progress-fill{height:100%; background:var(--green); border-radius:20px; transition:width 0.5s ease;}
+.progress-caption{font-size:12px; color:var(--muted); margin-top:8px;}
+
+/* ---------- Stay ---------- */
+.stay-card{margin-bottom:14px;}
+.stay-top{display:flex; justify-content:space-between; align-items:flex-start;}
+.stay-city{font-size:11px; font-weight:700; letter-spacing:0.04em; color:var(--terracotta); margin-bottom:6px;}
+.stay-name{font-family:var(--serif); font-size:19px; font-weight:500;}
+.stay-alt{font-size:12px; color:var(--muted); margin-top:2px;}
+.stay-dates{font-size:13px; margin-top:12px; color:var(--charcoal-soft);}
+.confirm-toggle{
+  margin-top:16px; padding-top:14px; border-top:1px solid var(--line);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.status-pill{
+  font-size:12px; font-weight:700; padding:5px 12px; border-radius:20px;
+  border:none;
+}
+.status-pill.no{background:var(--terracotta-soft); color:var(--terracotta);}
+.status-pill.yes{background:var(--green-soft); color:var(--green);}
+
+/* ---------- Things to do ---------- */
+.todo-progress{margin-bottom:22px;}
+.todo-count{font-family:var(--serif); font-size:32px; font-weight:500;}
+.todo-add{
+  display:flex; gap:8px; margin-top:14px;
+}
+.todo-add input{
+  flex:1; border:1px solid var(--line); border-radius:12px;
+  padding:10px 13px; font-size:14px; background:var(--paper-raised);
+}
+.icon-btn{
+  border:1px solid var(--line); background:var(--paper-raised);
+  border-radius:12px; width:42px; flex-shrink:0; font-size:18px;
+  color:var(--charcoal); display:flex; align-items:center; justify-content:center;
+}
+.remove-x{background:none; border:none; color:var(--muted); font-size:15px; padding:4px 6px;}
+
+/* ---------- Expenses ---------- */
+.exp-dash{margin-bottom:20px;}
+.exp-figures{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px;}
+.exp-fig-label{font-size:10.5px; font-weight:700; color:var(--muted); letter-spacing:0.03em;}
+.exp-fig-val{font-size:16px; font-weight:700; margin-top:4px;}
+.exp-fig-val.spent{color:var(--terracotta);}
+.exp-fig-val.remain{color:var(--green);}
+.bar-track{height:10px; border-radius:20px; background:var(--sand); overflow:hidden; display:flex;}
+.bar-fill{height:100%; background:var(--terracotta);}
+.budget-edit{display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; color:var(--muted);}
+.budget-edit input{
+  border:1px solid var(--line); border-radius:8px; padding:6px 9px;
+  width:110px; font-size:13.5px; font-weight:600; background:var(--paper);
+}
+.cat-row{display:flex; align-items:center; gap:12px; padding:10px 0;}
+.cat-row + .cat-row{border-top:1px solid var(--line);}
+.cat-sym{
+  width:34px; height:34px; border-radius:10px; background:var(--sand);
+  display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0;
+}
+.cat-name{font-size:14px; font-weight:600; flex:1;}
+.cat-amt{font-size:14px; font-weight:700;}
+.exp-entry{display:flex; justify-content:space-between; align-items:center; padding:11px 0;}
+.exp-entry + .exp-entry{border-top:1px solid var(--line);}
+.exp-entry-desc{font-size:14px; font-weight:600;}
+.exp-entry-meta{font-size:11.5px; color:var(--muted); margin-top:2px;}
+.exp-entry-amt{font-size:14.5px; font-weight:700; margin-right:10px;}
+.fab{
+  position:fixed; right:20px; bottom:88px; z-index:40;
+  background:var(--charcoal); color:var(--paper-raised);
+  border:none; border-radius:50px; padding:14px 20px;
+  font-size:14px; font-weight:700; display:flex; align-items:center; gap:8px;
+  box-shadow:0 8px 22px rgba(35,32,25,0.28);
+}
+@media (min-width:860px){ .fab{ bottom:40px; } }
+
+/* ---------- Modal ---------- */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(35,32,25,0.42);
+  display:none; align-items:flex-end; justify-content:center;
+  z-index:100;
+}
+.modal-backdrop.open{display:flex;}
+@media (min-width:640px){ .modal-backdrop{align-items:center;} }
+.modal{
+  background:var(--paper-raised); width:100%; max-width:440px;
+  border-radius:22px 22px 0 0; padding:26px 22px calc(22px + env(safe-area-inset-bottom));
+  max-height:88vh; overflow-y:auto;
+  animation:slideup 0.25s ease;
+}
+@media (min-width:640px){ .modal{border-radius:22px; margin:20px;} }
+@keyframes slideup{from{transform:translateY(24px); opacity:0;} to{transform:none; opacity:1;}}
+.modal h3{font-family:var(--serif); font-size:20px; margin-bottom:16px;}
+.field{margin-bottom:14px;}
+.field label{display:block; font-size:11.5px; font-weight:700; color:var(--muted); letter-spacing:0.03em; margin-bottom:6px;}
+.field input, .field select{
+  width:100%; border:1px solid var(--line); border-radius:11px;
+  padding:11px 13px; font-size:14.5px; background:var(--paper);
+}
+.seg{display:flex; gap:6px;}
+.seg button{
+  flex:1; padding:9px 6px; border-radius:10px; border:1px solid var(--line);
+  background:var(--paper); font-size:13px; font-weight:600; color:var(--charcoal-soft);
+}
+.seg button.active{background:var(--charcoal); color:var(--paper-raised); border-color:var(--charcoal);}
+.modal-actions{display:flex; gap:10px; margin-top:18px;}
+.btn{
+  flex:1; padding:13px; border-radius:12px; border:none;
+  font-size:14.5px; font-weight:700; text-align:center;
+}
+.btn.primary{background:var(--charcoal); color:var(--paper-raised);}
+.btn.ghost{background:var(--sand); color:var(--charcoal);}
+.btn.danger{background:var(--terracotta); color:var(--paper-raised);}
+
+/* ---------- More ---------- */
+.more-group{margin-bottom:26px;}
+.check-line{
+  display:flex; align-items:center; gap:10px; padding:8px 0; font-size:14px;
+}
+.check-line .m{color:var(--green); width:16px; flex-shrink:0;}
+.check-line.x .m{color:var(--terracotta);}
+.more-link{
+  display:flex; justify-content:space-between; align-items:center;
+  width:100%; background:none; border:none; padding:14px 0;
+  font-size:14.5px; font-weight:600; color:var(--charcoal);
+  border-bottom:1px solid var(--line); text-align:left;
+}
+.toast{
+  position:fixed; bottom:100px; left:50%; transform:translateX(-50%);
+  background:var(--charcoal); color:var(--paper-raised);
+  padding:11px 18px; border-radius:30px; font-size:13px; font-weight:600;
+  z-index:200; opacity:0; pointer-events:none; transition:opacity 0.25s ease, transform 0.25s ease;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(-6px);}
+@media (min-width:860px){ .toast{bottom:40px;} }
+.file-input{display:none;}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <nav id="sidebar">
+    <div class="brand">Eldhs × Sha</div>
+    <div class="brand-sub">Thailand · 5–9 Oct 2026</div>
+    <ul class="nav-list" id="navlist-desktop"></ul>
+  </nav>
+
+  <main id="main">
+    <section class="panel" data-panel="home"></section>
+    <section class="panel" data-panel="flights"></section>
+    <section class="panel" data-panel="itinerary"></section>
+    <section class="panel" data-panel="todo"></section>
+    <section class="panel" data-panel="stay"></section>
+    <section class="panel" data-panel="expenses"></section>
+    <section class="panel" data-panel="more"></section>
+  </main>
+</div>
+
+<nav id="bottomnav"></nav>
+<button class="fab" id="addExpenseFab" style="display:none;"><span>＋</span>Add expense</button>
+
+<div class="modal-backdrop" id="expenseModalBackdrop">
+  <div class="modal">
+    <h3>Add expense</h3>
+    <div class="field">
+      <label>Amount (₹)</label>
+      <input type="number" id="expAmount" inputmode="decimal" placeholder="0">
+    </div>
+    <div class="field">
+      <label>Category</label>
+      <select id="expCategory"></select>
+    </div>
+    <div class="field">
+      <label>Description</label>
+      <input type="text" id="expDesc" placeholder="e.g. Tuk-tuk to hotel">
+    </div>
+    <div class="field">
+      <label>Date</label>
+      <input type="date" id="expDate">
+    </div>
+    <div class="field">
+      <label>Paid by</label>
+      <div class="seg" id="expPaidBy">
+        <button data-v="Eldhs">Eldhs</button>
+        <button data-v="Sha">Sha</button>
+        <button data-v="Both" class="active">Both</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Payment method</label>
+      <div class="seg" id="expMethod">
+        <button data-v="Cash" class="active">Cash</button>
+        <button data-v="UPI">UPI</button>
+        <button data-v="Card">Card</button>
+        <button data-v="Other">Other</button>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn ghost" id="expCancel">Cancel</button>
+      <button class="btn primary" id="expSave">Save expense</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="resetModalBackdrop">
+  <div class="modal">
+    <h3>Reset trip data?</h3>
+    <p class="muted small">This clears all expenses, checklist progress, personal plans and settings stored on this device. This can't be undone.</p>
+    <div class="modal-actions">
+      <button class="btn ghost" id="resetCancel">Cancel</button>
+      <button class="btn danger" id="resetConfirm">Reset everything</button>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="importFile" class="file-input" accept="application/json">
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   DATA — sourced from the "Tick Your Tour" Bangkok+Pattaya
+   couple package PDF and the trip's flight bookings.
+============================================================ */
+const TRIP = {
+  couple: "Eldhs × Sha",
+  dateStart: "2026-10-05",
+  dateEnd: "2026-10-09",
+  destinations: "Bangkok + Pattaya",
+  route: ["Bengaluru","Bangkok","Pattaya","Bangkok","Kochi"],
+  flights: {
+    outbound: {
+      airline:"Thai Airways", num:"TG-326", plane:"Airbus A350",
+      date:"05 October 2026",
+      from:{code:"BLR", city:"Bengaluru", terminal:"Terminal 2", time:"00:55"},
+      to:{code:"BKK", city:"Bangkok", terminal:"", time:"06:20"},
+      price: 30065
+    },
+    ret: {
+      airline:"Thai AirAsia", num:"FD-170", plane:"",
+      date:"09 October 2026",
+      from:{code:"DMK", city:"Bangkok", terminal:"Terminal 1", time:"20:15"},
+      to:{code:"COK", city:"Kochi", terminal:"Terminal 3", time:"22:30"},
+      price: 38111
+    }
+  },
+  hotels: [
+    { key:"pattaya", city:"Pattaya", name:"Piyada Residency / Hiso Hotel", alt:"or Similar", from:"05 Oct", to:"07 Oct", nights:2 },
+    { key:"bangkok", city:"Bangkok", name:"Platinum Suite", alt:"or Similar", from:"07 Oct", to:"09 Oct", nights:2 }
+  ],
+  packagePricePerPerson: 25999,
+  packagePax: 2,
+  amountPaid: 16700,
+  days: [
+    {
+      id:"d1", num:1, date:"05 October", title:"Arrival → Pattaya", place:"Pattaya",
+      blocks:[
+        { title:"Arrival", events:[
+          {time:"00:55", label:"Depart Bengaluru"},
+          {time:"06:20", label:"Arrive Bangkok"},
+          {time:"", label:"Private transfer to Pattaya"}
+        ]},
+        { title:"Tiger Topia Sriracha Zoo", note:"Included — zoo entry, tiger show, crocodile show, breakfast" },
+        { title:"Hotel", note:"Piyada Residency / Hiso Hotel or Similar — check in, Night 1 of 2" },
+        { title:"Evening", note:"Leisure — explore near the beaches" }
+      ],
+      checklist:[
+        {id:"d1c1", label:"Airport arrival"},
+        {id:"d1c2", label:"Pattaya transfer"},
+        {id:"d1c3", label:"Tiger Topia"},
+        {id:"d1c4", label:"Tiger show"},
+        {id:"d1c5", label:"Crocodile show"},
+        {id:"d1c6", label:"Hotel check-in"},
+        {id:"d1c7", label:"Evening beach exploration"}
+      ]
+    },
+    {
+      id:"d2", num:2, date:"06 October", title:"Coral Island", place:"Pattaya",
+      blocks:[
+        { title:"Morning", note:"Breakfast at the hotel" },
+        { title:"Coral Island", note:"Private speedboat crossing, included Thai-style lunch" },
+        { title:"Optional · own cost", tagOptional:true, note:"Jet ski, parasailing and other water sports" },
+        { title:"Evening", tagFree:true, note:"Walking Street / nightlife — free time" }
+      ],
+      checklist:[
+        {id:"d2c1", label:"Coral Island tour"},
+        {id:"d2c2", label:"Private speedboat"},
+        {id:"d2c3", label:"Thai-style lunch"},
+        {id:"d2c4", label:"Evening at Walking Street"}
+      ]
+    },
+    {
+      id:"d3", num:3, date:"07 October", title:"Pattaya → Bangkok", place:"Bangkok",
+      blocks:[
+        { title:"Morning", note:"Breakfast and check-out from the Pattaya hotel" },
+        { title:"Pattaya city tour", note:"Big Buddha, Pattaya View Point, Gems Gallery" },
+        { title:"Transfer", note:"Pattaya → Bangkok" },
+        { title:"Bangkok hotel", note:"Platinum Suite or Similar — check in, Night 1 of 2" },
+        { title:"Evening", note:"Leisure" }
+      ],
+      checklist:[
+        {id:"d3c1", label:"Check out of Pattaya hotel"},
+        {id:"d3c2", label:"Big Buddha"},
+        {id:"d3c3", label:"Pattaya View Point"},
+        {id:"d3c4", label:"Gems Gallery"},
+        {id:"d3c5", label:"Transfer to Bangkok"},
+        {id:"d3c6", label:"Bangkok hotel check-in"}
+      ]
+    },
+    {
+      id:"d4", num:4, date:"08 October", title:"Safari World & Marine Park", place:"Bangkok",
+      blocks:[
+        { title:"Morning", note:"Breakfast at the hotel" },
+        { title:"Safari Park", note:"Open-vehicle safari, animal viewing" },
+        { title:"Marine Park", note:"Dolphin shows, animal shows" },
+        { title:"Lunch", note:"Buffet lunch included" },
+        { title:"Evening", note:"Return to the Bangkok hotel" }
+      ],
+      checklist:[
+        {id:"d4c1", label:"Safari Park"},
+        {id:"d4c2", label:"Marine Park"},
+        {id:"d4c3", label:"Buffet lunch"},
+        {id:"d4c4", label:"Return to hotel"}
+      ]
+    },
+    {
+      id:"d5", num:5, date:"09 October", title:"Bangkok → Kochi", place:"Bangkok",
+      blocks:[
+        { title:"Morning", note:"Breakfast and check-out" },
+        { title:"Bangkok city tour", note:"Golden Buddha Temple (Wat Traimit), Mini Reclining Buddha Temple" },
+        { title:"Airport transfer", note:"Bangkok → DMK" },
+        { title:"Return flight", note:"FD-170 · DMK → COK · 20:15 → 22:30" }
+      ],
+      checklist:[
+        {id:"d5c1", label:"Check out of Bangkok hotel"},
+        {id:"d5c2", label:"Golden Buddha Temple"},
+        {id:"d5c3", label:"Mini Reclining Buddha Temple"},
+        {id:"d5c4", label:"Airport transfer"},
+        {id:"d5c5", label:"Depart Bangkok"}
+      ]
+    }
+  ],
+  included: [
+    "2 Nights Pattaya stay with breakfast",
+    "2 Nights Bangkok stay with breakfast",
+    "Private airport transfers (DMK/BKK – Hotel – Airport)",
+    "Tiger Topia Sriracha Zoo — private, with breakfast, tiger & crocodile shows",
+    "Coral Island tour by private speedboat with Thai lunch",
+    "Pattaya City Tour",
+    "Bangkok City Tour — Golden Buddha & Mini Reclining Buddha Temples",
+    "Safari World & Marine Park Tour with buffet lunch"
+  ],
+  excluded: [
+    "International / domestic flight tickets",
+    "5% GST",
+    "2% TCS",
+    "Thailand visa fees & processing",
+    "Travel insurance",
+    "Optional water sports at Coral Island",
+    "Personal expenses — shopping, tips, laundry",
+    "Meals not mentioned above",
+    "Early check-in / late check-out",
+    "Anything not specifically mentioned in package inclusions"
+  ],
+  packageActivities: [
+    {id:"pa1", label:"Tiger Topia Sriracha Zoo"},
+    {id:"pa2", label:"Coral Island by speedboat"},
+    {id:"pa3", label:"Pattaya City Tour"},
+    {id:"pa4", label:"Bangkok City Tour"},
+    {id:"pa5", label:"Safari World & Marine Park"}
+  ],
+  expenseCategories: [
+    {key:"flights", label:"Flights", sym:"✈"},
+    {key:"package", label:"Package", sym:"◆"},
+    {key:"hotels", label:"Hotels", sym:"⌂"},
+    {key:"food", label:"Food", sym:"○"},
+    {key:"transport", label:"Transport", sym:"→"},
+    {key:"activities", label:"Activities", sym:"✧"},
+    {key:"shopping", label:"Shopping", sym:"□"},
+    {key:"sim", label:"SIM", sym:"⊙"},
+    {key:"other", label:"Other", sym:"⋯"}
+  ]
+};
+
+const NAV = [
+  {key:"home", label:"Home", sym:"⌂"},
+  {key:"flights", label:"Flights", sym:"✈"},
+  {key:"itinerary", label:"Itinerary", sym:"▣"},
+  {key:"todo", label:"Things To Do", sym:"✓"},
+  {key:"stay", label:"Stay", sym:"⌂"},
+  {key:"expenses", label:"Expenses", sym:"₨"},
+  {key:"more", label:"More", sym:"⋯"}
+];
+const MOBILE_NAV = ["home","flights","itinerary","todo","more"];
+
+/* ============================================================
+   TINY INDEXEDDB KEY/VALUE STORE
+============================================================ */
+const DB_NAME = "eldhs-sha-thailand";
+const STORE = "kv";
+let dbPromise = null;
+function openDB(){
+  if(dbPromise) return dbPromise;
+  dbPromise = new Promise((resolve,reject)=>{
+    if(!('indexedDB' in window)){ resolve(null); return; }
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = ()=>{ req.result.createObjectStore(STORE); };
+    req.onsuccess = ()=> resolve(req.result);
+    req.onerror = ()=> resolve(null);
+  });
+  return dbPromise;
+}
+async function idbGet(key, fallback){
+  try{
+    const db = await openDB();
+    if(!db) return fallback;
+    return await new Promise((resolve)=>{
+      const tx = db.transaction(STORE,"readonly");
+      const req = tx.objectStore(STORE).get(key);
+      req.onsuccess = ()=> resolve(req.result === undefined ? fallback : req.result);
+      req.onerror = ()=> resolve(fallback);
+    });
+  }catch(e){ return fallback; }
+}
+async function idbSet(key, value){
+  try{
+    const db = await openDB();
+    if(!db) return false;
+    return await new Promise((resolve)=>{
+      const tx = db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).put(value, key);
+      tx.oncomplete = ()=> resolve(true);
+      tx.onerror = ()=> resolve(false);
+    });
+  }catch(e){ return false; }
+}
+async function idbGetAllKV(){
+  try{
+    const db = await openDB();
+    if(!db) return {};
+    return await new Promise((resolve)=>{
+      const tx = db.transaction(STORE,"readonly");
+      const store = tx.objectStore(STORE);
+      const out = {};
+      const cursorReq = store.openCursor();
+      cursorReq.onsuccess = (e)=>{
+        const cur = e.target.result;
+        if(cur){ out[cur.key] = cur.value; cur.continue(); }
+        else resolve(out);
+      };
+      cursorReq.onerror = ()=> resolve(out);
+    });
+  }catch(e){ return {}; }
+}
+async function idbClearAll(){
+  try{
+    const db = await openDB();
+    if(!db) return false;
+    return await new Promise((resolve)=>{
+      const tx = db.transaction(STORE,"readwrite");
+      tx.objectStore(STORE).clear();
+      tx.oncomplete = ()=> resolve(true);
+      tx.onerror = ()=> resolve(false);
+    });
+  }catch(e){ return false; }
+}
+
+/* ============================================================
+   APP STATE
+============================================================ */
+let state = {
+  checklist: {},          // itinerary checkbox id -> bool
+  packageActivityDone: {},// package activity id -> bool
+  personalTodos: [],      // [{id,label,done}]
+  hotelConfirmed: {},     // hotel key -> bool
+  pendingAmount: 35298,   // 51998 - 16700
+  budget: 150000,
+  expenses: []            // [{id,amount,category,desc,date,paidBy,method}]
+};
+
+function fmtINR(n){
+  n = Math.round(n||0);
+  return "₹" + n.toLocaleString("en-IN");
+}
+function uid(){ return Math.random().toString(36).slice(2,10) + Date.now().toString(36); }
+
+async function loadState(){
+  const kv = await idbGetAllKV();
+  if(kv.checklist) state.checklist = kv.checklist;
+  if(kv.packageActivityDone) state.packageActivityDone = kv.packageActivityDone;
+  if(kv.personalTodos) state.personalTodos = kv.personalTodos;
+  else state.personalTodos = [
+    {id:uid(), label:"Take couple photos", done:false},
+    {id:uid(), label:"Try Thai street food", done:false},
+    {id:uid(), label:"Beach sunset", done:false},
+    {id:uid(), label:"Buy souvenirs", done:false},
+    {id:uid(), label:"Explore local market", done:false},
+    {id:uid(), label:"Find a rooftop viewpoint", done:false}
+  ];
+  if(kv.hotelConfirmed) state.hotelConfirmed = kv.hotelConfirmed;
+  if(typeof kv.pendingAmount === "number") state.pendingAmount = kv.pendingAmount;
+  if(typeof kv.budget === "number") state.budget = kv.budget;
+  if(kv.expenses) state.expenses = kv.expenses;
+}
+function persist(key){ idbSet(key, state[key]); }
+
+/* ============================================================
+   TOAST
+============================================================ */
+let toastTimer = null;
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> t.classList.remove("show"), 2200);
+}
+
+/* ============================================================
+   DATE HELPERS
+============================================================ */
+function dayIndexFromNow(){
+  const start = new Date(TRIP.dateStart+"T00:00:00");
+  const end = new Date(TRIP.dateEnd+"T23:59:59");
+  const now = new Date();
+  if(now < start) return -1;
+  if(now > end) return 99;
+  const diff = Math.floor((now - new Date(start.getFullYear(),start.getMonth(),start.getDate())) / 86400000);
+  return diff + 1; // 1..5
+}
+function daysUntilStart(){
+  const start = new Date(TRIP.dateStart+"T00:00:00");
+  const now = new Date();
+  const diff = Math.ceil((start - now) / 86400000);
+  return diff;
+}
+
+/* ============================================================
+   RENDER: NAVIGATION
+============================================================ */
+let currentPanel = "home";
+function renderNav(){
+  const dnav = document.getElementById("navlist-desktop");
+  dnav.innerHTML = NAV.map(n=>`
+    <li><button class="nav-item ${n.key===currentPanel?'active':''}" data-nav="${n.key}">
+      <span class="sym">${n.sym}</span>${n.label}
+    </button></li>
+  `).join("");
+  const bnav = document.getElementById("bottomnav");
+  bnav.innerHTML = MOBILE_NAV.map(key=>{
+    const n = NAV.find(x=>x.key===key);
+    return `<button class="bn-item ${key===currentPanel?'active':''}" data-nav="${key}">
+      <span class="sym">${n.sym}</span>${n.label}
+    </button>`;
+  }).join("");
+  document.querySelectorAll("[data-nav]").forEach(el=>{
+    el.addEventListener("click", ()=> showPanel(el.getAttribute("data-nav")));
+  });
+}
+function showPanel(key){
+  currentPanel = key;
+  document.querySelectorAll(".panel").forEach(p=>{
+    p.classList.toggle("active", p.getAttribute("data-panel")===key);
+  });
+  renderNav();
+  document.getElementById("addExpenseFab").style.display = (key==="expenses") ? "flex" : "none";
+  window.scrollTo({top:0, behavior:"instant" in window ? "instant":"auto"});
+  if(key==="flights") armFlightAnimations();
+}
+
+/* ============================================================
+   RENDER: HOME
+============================================================ */
+function renderHome(){
+  const el = document.querySelector('[data-panel="home"]');
+  const dIdx = dayIndexFromNow();
+  let countdownNum, countdownLabel;
+  if(dIdx === -1){
+    const d = daysUntilStart();
+    countdownNum = d;
+    countdownLabel = d===1 ? "Our trip begins tomorrow" : `Our trip begins in ${d} days`;
+  } else if(dIdx >=1 && dIdx <=5){
+    countdownNum = `${dIdx}/5`;
+    countdownLabel = `Day ${dIdx} of 5`;
+  } else {
+    countdownNum = "✓";
+    countdownLabel = "Trip completed";
+  }
+
+  const next = computeNextEvent(dIdx);
+
+  el.innerHTML = `
+    <div class="hero">
+      <div class="hero-names">Eldhs ❦ Sha</div>
+      <h1 class="hero-title">Our Thailand<br>Trip</h1>
+      <div class="hero-meta">
+        <span>05 – 09 October 2026</span><span class="dot"></span><span>${TRIP.destinations}</span>
+      </div>
+      <div class="hero-meta" style="margin-top:4px;"><span>5 Days · 4 Nights</span></div>
+      <div class="countdown-card">
+        <div class="countdown-num">${countdownNum}</div>
+        <div class="countdown-label">${countdownLabel}</div>
+      </div>
+    </div>
+
+    <div class="grid4">
+      <div class="ov-card"><div class="ov-label">Trip</div><div class="ov-value">5D / 4N</div></div>
+      <div class="ov-card"><div class="ov-label">Route</div><div class="ov-value">BLR → BKK<br>DMK → COK</div></div>
+      <div class="ov-card"><div class="ov-label">Stay</div><div class="ov-value">2N Pattaya<br>2N Bangkok</div></div>
+      <div class="ov-card"><div class="ov-label">Flights</div><div class="ov-value">${fmtINR(TRIP.flights.outbound.price + TRIP.flights.ret.price)}</div></div>
+    </div>
+
+    <div class="next-card">
+      <div class="next-tag">Next</div>
+      <div class="next-title">${next.title}</div>
+      <div class="next-sub">${next.sub}</div>
+    </div>
+
+    <div class="journey">
+      <div class="section-title" style="font-size:18px;">Journey</div>
+      <ul class="journey-list">
+        ${TRIP.route.map(p=>`<li>${p}</li>`).join("")}
+      </ul>
+    </div>
+
+    <div class="card pkg-card">
+      <div class="eyebrow">Travel package</div>
+      <div class="pkg-row">
+        <span class="muted small">Paid</span>
+        <span class="pkg-amt">${fmtINR(TRIP.amountPaid)}</span>
+      </div>
+      <div class="pkg-row">
+        <span class="muted small">Pending</span>
+        <input class="pkg-input" id="pendingInput" type="number" inputmode="decimal" value="${state.pendingAmount}">
+      </div>
+      <div class="quote-note">
+        Quoted package price: <b>${fmtINR(TRIP.packagePricePerPerson)} / person</b> · 2 people <b>${fmtINR(TRIP.packagePricePerPerson*TRIP.packagePax)}</b>.
+        This is the agency's quoted price, not automatically the amount paid.
+      </div>
+    </div>
+  `;
+
+  document.getElementById("pendingInput").addEventListener("change", async (e)=>{
+    const v = parseFloat(e.target.value) || 0;
+    state.pendingAmount = v;
+    await persist("pendingAmount");
+    toast("Pending amount updated");
+  });
+}
+
+function computeNextEvent(dIdx){
+  if(dIdx === -1){
+    const f = TRIP.flights.outbound;
+    return { title: `✈ ${f.num}`, sub: `Bengaluru → Bangkok · ${f.date.slice(0,2)} Oct · ${f.from.time}` };
+  }
+  if(dIdx >= 1 && dIdx <= 5){
+    for(let i = dIdx-1; i < TRIP.days.length; i++){
+      const day = TRIP.days[i];
+      const item = day.checklist.find(c => !state.checklist[c.id]);
+      if(item){
+        return { title: item.label, sub: `Day ${day.num} · ${day.place}` };
+      }
+    }
+    return { title: "Return flight", sub: `FD-170 · Bangkok → Kochi · 20:15` };
+  }
+  return { title: "Trip completed", sub: "Hope it was unforgettable — check Expenses for the final tally." };
+}
+
+/* ============================================================
+   RENDER: FLIGHTS
+============================================================ */
+function flightCard(f, dir){
+  return `
+    <div class="card flight-card" data-flight="${dir}">
+      <div class="flight-head">
+        <div>
+          <div class="flight-route-title">${f.from.city} → ${f.to.city}</div>
+          <div class="flight-airline">${f.airline}${f.plane? " · "+f.plane:""} · ${f.date}</div>
+        </div>
+        <div class="flight-num">${f.num}</div>
+      </div>
+      <div class="flight-path">
+        <div class="fp-side">
+          <div class="fp-code">${f.from.code}</div>
+          <div class="fp-city">${f.from.city}</div>
+          ${f.from.terminal?`<div class="fp-terminal">${f.from.terminal}</div>`:""}
+          <div class="fp-time">${f.from.time}</div>
+        </div>
+        <div class="fp-line paused"><div class="track"></div><div class="plane">✈</div></div>
+        <div class="fp-side">
+          <div class="fp-code">${f.to.code}</div>
+          <div class="fp-city">${f.to.city}</div>
+          ${f.to.terminal?`<div class="fp-terminal">${f.to.terminal}</div>`:""}
+          <div class="fp-time">${f.to.time}</div>
+        </div>
+      </div>
+      <div class="flight-foot">
+        <span class="muted">Ticket</span>
+        <span style="font-weight:700;">${fmtINR(f.price)}</span>
+      </div>
+    </div>
+  `;
+}
+function renderFlights(){
+  const el = document.querySelector('[data-panel="flights"]');
+  el.innerHTML = `
+    <div class="eyebrow">Flights</div>
+    <h2 class="section-title" style="margin-bottom:18px;">How we're getting there</h2>
+    ${flightCard(TRIP.flights.outbound, "out")}
+    ${flightCard(TRIP.flights.ret, "ret")}
+    <div class="flight-total">
+      <div class="muted small">Total flight cost</div>
+      <div class="amt">${fmtINR(TRIP.flights.outbound.price + TRIP.flights.ret.price)}</div>
+      <div class="flight-total-rows">
+        <span>Outbound ${fmtINR(TRIP.flights.outbound.price)}</span>
+        <span>Return ${fmtINR(TRIP.flights.ret.price)}</span>
+      </div>
+    </div>
+  `;
+}
+let flightObserver = null;
+function armFlightAnimations(){
+  if(flightObserver) flightObserver.disconnect();
+  flightObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      const line = entry.target.querySelector(".fp-line");
+      if(!line) return;
+      if(entry.isIntersecting) line.classList.remove("paused");
+      else line.classList.add("paused");
+    });
+  }, {threshold:0.4});
+  document.querySelectorAll(".flight-card").forEach(c=> flightObserver.observe(c));
+}
+
+/* ============================================================
+   RENDER: ITINERARY
+============================================================ */
+let openDayId = null;
+function renderItinerary(){
+  const el = document.querySelector('[data-panel="itinerary"]');
+  el.innerHTML = `
+    <div class="eyebrow">Itinerary</div>
+    <h2 class="section-title" style="margin-bottom:18px;">Day by day</h2>
+    <div class="timeline" id="timelineWrap"></div>
+  `;
+  const wrap = document.getElementById("timelineWrap");
+  wrap.innerHTML = TRIP.days.map(day=>{
+    const done = day.checklist.every(c=> state.checklist[c.id]);
+    const isOpen = openDayId === day.id;
+    return `
+    <div class="day-card ${isOpen?'open':''}" data-day="${day.id}">
+      <button class="day-head ${done?'done':''}" data-toggle="${day.id}">
+        <div class="day-num">${String(day.num).padStart(2,'0')}</div>
+        <div class="day-headtext">
+          <div class="day-date">${day.date}</div>
+          <div class="day-title">${day.title}</div>
+        </div>
+        <div class="day-chevron">→</div>
+      </button>
+      <div class="day-body">
+        ${day.blocks.map(b=>`
+          <div class="day-block">
+            <div class="day-block-title">${b.title}${b.tagOptional?'<span class="tag optional">Optional · Own cost</span>':''}${b.tagFree?'<span class="tag free">Free time</span>':''}</div>
+            ${b.events ? b.events.map(ev=>`<div class="event-row"><span class="event-time">${ev.time}</span><span>${ev.label}</span></div>`).join("") : `<div style="font-size:13.5px; color:var(--charcoal-soft);">${b.note}</div>`}
+          </div>
+        `).join("")}
+        <div class="day-block">
+          <div class="day-block-title">Checklist</div>
+          ${day.checklist.map(c=>`
+            <div class="check-item ${state.checklist[c.id]?'checked':''}" data-check="${c.id}">
+              <span class="check-box">${state.checklist[c.id]?'✓':''}</span>
+              <span class="check-label">${c.label}</span>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  wrap.querySelectorAll("[data-toggle]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const id = btn.getAttribute("data-toggle");
+      openDayId = (openDayId === id) ? null : id;
+      renderItinerary();
+      requestAnimationFrame(setDayBodyHeights);
+    });
+  });
+  wrap.querySelectorAll("[data-check]").forEach(row=>{
+    row.addEventListener("click", async ()=>{
+      const id = row.getAttribute("data-check");
+      state.checklist[id] = !state.checklist[id];
+      await persist("checklist");
+      renderItinerary();
+      requestAnimationFrame(setDayBodyHeights);
+    });
+  });
+  requestAnimationFrame(setDayBodyHeights);
+}
+function setDayBodyHeights(){
+  document.querySelectorAll(".day-card").forEach(card=>{
+    const body = card.querySelector(".day-body");
+    if(card.classList.contains("open")){
+      body.style.maxHeight = body.scrollHeight + "px";
+    } else {
+      body.style.maxHeight = "0px";
+    }
+  });
+}
+
+/* ============================================================
+   RENDER: STAY
+============================================================ */
+function renderStay(){
+  const el = document.querySelector('[data-panel="stay"]');
+  el.innerHTML = `
+    <div class="eyebrow">Stay</div>
+    <h2 class="section-title" style="margin-bottom:18px;">Where we're staying</h2>
+    ${TRIP.hotels.map(h=>{
+      const confirmed = !!state.hotelConfirmed[h.key];
+      return `
+      <div class="card stay-card">
+        <div class="stay-top">
+          <div>
+            <div class="stay-city">${h.city}</div>
+            <div class="stay-name">${h.name}</div>
+            <div class="stay-alt">${h.alt}</div>
+          </div>
+        </div>
+        <div class="stay-dates">${h.from} → ${h.to} · ${h.nights} nights · breakfast included</div>
+        <div class="confirm-toggle">
+          <span class="muted small">Hotel confirmation</span>
+          <button class="status-pill ${confirmed?'yes':'no'}" data-confirm="${h.key}">${confirmed?'Confirmed':'Not confirmed'}</button>
+        </div>
+      </div>`;
+    }).join("")}
+  `;
+  el.querySelectorAll("[data-confirm]").forEach(btn=>{
+    btn.addEventListener("click", async ()=>{
+      const key = btn.getAttribute("data-confirm");
+      state.hotelConfirmed[key] = !state.hotelConfirmed[key];
+      await persist("hotelConfirmed");
+      renderStay();
+    });
+  });
+}
+
+/* ============================================================
+   RENDER: THINGS TO DO
+============================================================ */
+function renderTodo(){
+  const el = document.querySelector('[data-panel="todo"]');
+  const totalItems = TRIP.packageActivities.length + state.personalTodos.length;
+  const doneItems = TRIP.packageActivities.filter(a=>state.packageActivityDone[a.id]).length
+    + state.personalTodos.filter(t=>t.done).length;
+
+  el.innerHTML = `
+    <div class="eyebrow">Things to do</div>
+    <h2 class="section-title">What we want to experience</h2>
+    <div class="todo-progress">
+      <div class="todo-count">${doneItems} / ${totalItems} completed</div>
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" style="width:${totalItems? (doneItems/totalItems*100):0}%;"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Package activities</div>
+      ${TRIP.packageActivities.map(a=>`
+        <div class="check-item ${state.packageActivityDone[a.id]?'checked':''}" data-pa="${a.id}">
+          <span class="check-box">${state.packageActivityDone[a.id]?'✓':''}</span>
+          <span class="check-label">${a.label}</span>
+        </div>
+      `).join("")}
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="eyebrow">Our own plans</div>
+      ${state.personalTodos.map(t=>`
+        <div class="check-item ${t.done?'checked':''}" data-todo="${t.id}" style="position:relative;">
+          <span class="check-box">${t.done?'✓':''}</span>
+          <span class="check-label">${t.label}</span>
+          <button class="remove-x" data-remove="${t.id}">×</button>
+        </div>
+      `).join("")}
+      <div class="todo-add">
+        <input type="text" id="newTodoInput" placeholder="Add something we want to do">
+        <button class="icon-btn" id="newTodoBtn">＋</button>
+      </div>
+    </div>
+  `;
+
+  el.querySelectorAll("[data-pa]").forEach(row=>{
+    row.addEventListener("click", async (e)=>{
+      if(e.target.closest("[data-remove]")) return;
+      const id = row.getAttribute("data-pa");
+      state.packageActivityDone[id] = !state.packageActivityDone[id];
+      await persist("packageActivityDone");
+      renderTodo();
+    });
+  });
+  el.querySelectorAll("[data-todo]").forEach(row=>{
+    row.addEventListener("click", async (e)=>{
+      if(e.target.closest("[data-remove]")) return;
+      const id = row.getAttribute("data-todo");
+      const t = state.personalTodos.find(x=>x.id===id);
+      t.done = !t.done;
+      await persist("personalTodos");
+      renderTodo();
+    });
+  });
+  el.querySelectorAll("[data-remove]").forEach(btn=>{
+    btn.addEventListener("click", async (e)=>{
+      e.stopPropagation();
+      const id = btn.getAttribute("data-remove");
+      state.personalTodos = state.personalTodos.filter(x=>x.id!==id);
+      await persist("personalTodos");
+      renderTodo();
+    });
+  });
+  const addNew = async ()=>{
+    const input = document.getElementById("newTodoInput");
+    const val = input.value.trim();
+    if(!val) return;
+    state.personalTodos.push({id:uid(), label:val, done:false});
+    await persist("personalTodos");
+    renderTodo();
+  };
+  document.getElementById("newTodoBtn").addEventListener("click", addNew);
+  document.getElementById("newTodoInput").addEventListener("keydown", (e)=>{
+    if(e.key === "Enter") addNew();
+  });
+}
+
+/* ============================================================
+   RENDER: EXPENSES
+============================================================ */
+function renderExpenses(){
+  const el = document.querySelector('[data-panel="expenses"]');
+  const spent = state.expenses.reduce((s,e)=>s+e.amount,0);
+  const remaining = state.budget - spent;
+  const pct = state.budget>0 ? Math.min(100, (spent/state.budget*100)) : 0;
+
+  const catTotals = TRIP.expenseCategories.map(c=>{
+    const total = state.expenses.filter(e=>e.category===c.key).reduce((s,e)=>s+e.amount,0);
+    return {...c, total};
+  }).filter(c=>c.total>0).sort((a,b)=>b.total-a.total);
+
+  const entries = [...state.expenses].sort((a,b)=> (b.date||"").localeCompare(a.date||""));
+
+  el.innerHTML = `
+    <div class="eyebrow">Expenses</div>
+    <h2 class="section-title" style="margin-bottom:18px;">Where our money is going</h2>
+
+    <div class="card exp-dash">
+      <div class="exp-figures">
+        <div><div class="exp-fig-label">Budget</div><div class="exp-fig-val">${fmtINR(state.budget)}</div></div>
+        <div><div class="exp-fig-label">Spent</div><div class="exp-fig-val spent">${fmtINR(spent)}</div></div>
+        <div><div class="exp-fig-label">Remaining</div><div class="exp-fig-val remain">${fmtINR(remaining)}</div></div>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;"></div></div>
+      <div class="budget-edit">
+        <span>Budget</span>
+        <input type="number" id="budgetInput" value="${state.budget}" inputmode="decimal">
+      </div>
+    </div>
+
+    ${catTotals.length ? `
+    <div class="card" style="margin-top:14px;">
+      <div class="eyebrow">By category</div>
+      ${catTotals.map(c=>`
+        <div class="cat-row">
+          <div class="cat-sym">${c.sym}</div>
+          <div class="cat-name">${c.label}</div>
+          <div class="cat-amt">${fmtINR(c.total)}</div>
+        </div>
+      `).join("")}
+    </div>` : ""}
+
+    <div class="card" style="margin-top:14px;">
+      <div class="eyebrow">All expenses</div>
+      ${entries.length ? entries.map(e=>{
+        const cat = TRIP.expenseCategories.find(c=>c.key===e.category);
+        return `
+        <div class="exp-entry">
+          <div>
+            <div class="exp-entry-desc">${e.desc || cat?.label || "Expense"}</div>
+            <div class="exp-entry-meta">${cat?.label||""} · ${e.date||""} · ${e.paidBy}</div>
+          </div>
+          <div style="display:flex; align-items:center;">
+            <span class="exp-entry-amt">${fmtINR(e.amount)}</span>
+            <button class="remove-x" data-delexp="${e.id}">×</button>
+          </div>
+        </div>`;
+      }).join("") : `<div class="muted small">No expenses logged yet.</div>`}
+    </div>
+  `;
+
+  document.getElementById("budgetInput").addEventListener("change", async (e)=>{
+    state.budget = parseFloat(e.target.value) || 0;
+    await persist("budget");
+    renderExpenses();
+  });
+  el.querySelectorAll("[data-delexp]").forEach(btn=>{
+    btn.addEventListener("click", async ()=>{
+      const id = btn.getAttribute("data-delexp");
+      state.expenses = state.expenses.filter(x=>x.id!==id);
+      await persist("expenses");
+      renderExpenses();
+      toast("Expense removed");
+    });
+  });
+}
+
+/* ---------- Add-expense modal ---------- */
+function openExpenseModal(){
+  const catSel = document.getElementById("expCategory");
+  catSel.innerHTML = TRIP.expenseCategories.map(c=>`<option value="${c.key}">${c.sym} ${c.label}</option>`).join("");
+  document.getElementById("expAmount").value = "";
+  document.getElementById("expDesc").value = "";
+  document.getElementById("expDate").value = new Date().toISOString().slice(0,10);
+  document.querySelectorAll("#expPaidBy button").forEach(b=>b.classList.toggle("active", b.dataset.v==="Both"));
+  document.querySelectorAll("#expMethod button").forEach(b=>b.classList.toggle("active", b.dataset.v==="Cash"));
+  document.getElementById("expenseModalBackdrop").classList.add("open");
+}
+function closeExpenseModal(){ document.getElementById("expenseModalBackdrop").classList.remove("open"); }
+
+/* ============================================================
+   RENDER: MORE
+============================================================ */
+function renderMore(){
+  const el = document.querySelector('[data-panel="more"]');
+  el.innerHTML = `
+    <div class="eyebrow">More</div>
+    <h2 class="section-title" style="margin-bottom:18px;">Package & settings</h2>
+
+    <div class="more-group">
+      <button class="more-link" data-nav-inline="stay"><span>Stay</span><span>→</span></button>
+      <button class="more-link" data-nav-inline="expenses"><span>Expenses</span><span>→</span></button>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Included</div>
+      ${TRIP.included.map(i=>`<div class="check-line"><span class="m">✓</span><span>${i}</span></div>`).join("")}
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="eyebrow">Not included</div>
+      ${TRIP.excluded.map(i=>`<div class="check-line x"><span class="m">×</span><span>${i}</span></div>`).join("")}
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="eyebrow">Settings</div>
+      <button class="more-link" id="exportBtn"><span>Export trip data</span><span>↘</span></button>
+      <button class="more-link" id="importBtn"><span>Import trip data</span><span>↗</span></button>
+      <button class="more-link" id="resetBtn" style="border-bottom:none; color:var(--terracotta);"><span>Reset trip data</span><span>×</span></button>
+    </div>
+  `;
+  el.querySelectorAll("[data-nav-inline]").forEach(b=>{
+    b.addEventListener("click", ()=> showPanel(b.getAttribute("data-nav-inline")));
+  });
+  document.getElementById("exportBtn").addEventListener("click", exportData);
+  document.getElementById("importBtn").addEventListener("click", ()=> document.getElementById("importFile").click());
+  document.getElementById("resetBtn").addEventListener("click", ()=> document.getElementById("resetModalBackdrop").classList.add("open"));
+}
+
+/* ---------- Export / Import / Reset ---------- */
+function exportData(){
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    checklist: state.checklist,
+    packageActivityDone: state.packageActivityDone,
+    personalTodos: state.personalTodos,
+    hotelConfirmed: state.hotelConfirmed,
+    pendingAmount: state.pendingAmount,
+    budget: state.budget,
+    expenses: state.expenses
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "eldhs-sha-thailand-2026.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  toast("Trip data exported");
+}
+async function importData(file){
+  try{
+    const text = await file.text();
+    const data = JSON.parse(text);
+    if(data.checklist) state.checklist = data.checklist;
+    if(data.packageActivityDone) state.packageActivityDone = data.packageActivityDone;
+    if(data.personalTodos) state.personalTodos = data.personalTodos;
+    if(data.hotelConfirmed) state.hotelConfirmed = data.hotelConfirmed;
+    if(typeof data.pendingAmount === "number") state.pendingAmount = data.pendingAmount;
+    if(typeof data.budget === "number") state.budget = data.budget;
+    if(data.expenses) state.expenses = data.expenses;
+    await Promise.all(["checklist","packageActivityDone","personalTodos","hotelConfirmed","pendingAmount","budget","expenses"].map(persist));
+    renderAll();
+    toast("Trip data imported");
+  }catch(e){
+    toast("Couldn't read that file");
+  }
+}
+async function resetAllData(){
+  await idbClearAll();
+  state = {
+    checklist:{}, packageActivityDone:{}, personalTodos:[], hotelConfirmed:{},
+    pendingAmount: 35298, budget: 150000, expenses: []
+  };
+  await loadState();
+  renderAll();
+  toast("Trip data reset");
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+function renderAll(){
+  renderHome();
+  renderFlights();
+  renderItinerary();
+  renderStay();
+  renderTodo();
+  renderExpenses();
+  renderMore();
+  renderNav();
+  showPanel(currentPanel);
+}
+
+document.getElementById("addExpenseFab").addEventListener("click", openExpenseModal);
+document.getElementById("expCancel").addEventListener("click", closeExpenseModal);
+document.getElementById("expenseModalBackdrop").addEventListener("click", (e)=>{
+  if(e.target.id === "expenseModalBackdrop") closeExpenseModal();
+});
+document.querySelectorAll("#expPaidBy button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll("#expPaidBy button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+  });
+});
+document.querySelectorAll("#expMethod button").forEach(b=>{
+  b.addEventListener("click", ()=>{
+    document.querySelectorAll("#expMethod button").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+  });
+});
+document.getElementById("expSave").addEventListener("click", async ()=>{
+  const amount = parseFloat(document.getElementById("expAmount").value);
+  if(!amount || amount<=0){ toast("Enter a valid amount"); return; }
+  const category = document.getElementById("expCategory").value;
+  const desc = document.getElementById("expDesc").value.trim();
+  const date = document.getElementById("expDate").value;
+  const paidBy = document.querySelector("#expPaidBy button.active").dataset.v;
+  const method = document.querySelector("#expMethod button.active").dataset.v;
+  state.expenses.push({id:uid(), amount, category, desc, date, paidBy, method});
+  await persist("expenses");
+  closeExpenseModal();
+  renderExpenses();
+  toast("Expense added");
+});
+
+document.getElementById("resetCancel").addEventListener("click", ()=>{
+  document.getElementById("resetModalBackdrop").classList.remove("open");
+});
+document.getElementById("resetConfirm").addEventListener("click", async ()=>{
+  document.getElementById("resetModalBackdrop").classList.remove("open");
+  await resetAllData();
+});
+document.getElementById("importFile").addEventListener("change", (e)=>{
+  const f = e.target.files[0];
+  if(f) importData(f);
+  e.target.value = "";
+});
+
+window.addEventListener("resize", ()=> requestAnimationFrame(setDayBodyHeights));
+
+(async function init(){
+  await loadState();
+  renderAll();
+})();
+</script>
+</body>
+</html>
